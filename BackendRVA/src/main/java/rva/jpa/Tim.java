@@ -38,7 +38,6 @@ public class Tim implements Serializable {
 	private List<Igrac> igracs;
 
 	//bi-directional many-to-one association to Liga
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="liga")
 	private Liga liga;

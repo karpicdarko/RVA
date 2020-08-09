@@ -3,7 +3,6 @@ package rva.jpa;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
@@ -36,13 +35,11 @@ public class Igrac implements Serializable {
 	private String prezime;
 
 	//bi-directional many-to-one association to Nacionalnost
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="nacionalnost")
 	private Nacionalnost nacionalnost;
 
 	//bi-directional many-to-one association to Tim
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="tim")
 	private Tim tim;
