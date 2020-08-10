@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,11 +65,13 @@ public class NacionalnostRestController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@Transactional
 	@DeleteMapping("nacionalnost/{id}")
 	public ResponseEntity<Nacionalnost> deleteNacionalnost(@PathVariable("id") Integer id) {
 		if(!nacionalnostRepository.existsById(id)) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+		jdbcTemplate.execute("delete from igrac where nacionalnost = " + id);
 		nacionalnostRepository.deleteById(id);
 		if(id == 6 && !nacionalnostRepository.existsById(6)) {
 			jdbcTemplate.execute("insert into \"nacionalnost\"(\"id\", \"naziv\", \"skracenica\") values(6, 'Argentinac', 'ARG')");

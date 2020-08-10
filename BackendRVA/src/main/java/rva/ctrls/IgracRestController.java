@@ -1,6 +1,8 @@
 package rva.ctrls;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +17,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.jpa.Igrac;
+import rva.jpa.Nacionalnost;
+import rva.jpa.Tim;
 import rva.repository.IgracRepository;
+import rva.repository.NacionalnostRepository;
+import rva.repository.TimRepository;
 
 @RestController
 public class IgracRestController {
 	
 	@Autowired
 	private IgracRepository igracRepository;
+	
+	@Autowired
+	private TimRepository timRepository;
+	
+	@Autowired
+	private NacionalnostRepository nacionalnostRepository;
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -44,6 +56,25 @@ public class IgracRestController {
 	@GetMapping("igracPrezime/{prezime}")
 	public Collection<Igrac> getIgracByPrezime(@PathVariable("prezime") String prezime) {
 		return igracRepository.findByPrezimeContainingIgnoreCase(prezime);
+	}
+	
+	@GetMapping("igraciZaTimId/{id}")
+	public Collection<Igrac> igracZaTimId(@PathVariable("id") Integer id)
+	{
+		Tim t = timRepository.getOne(id);
+		return igracRepository.findByTim(t);
+	}
+	
+	@GetMapping("igraciZaNacionalnostSkracenica/{skracenica}")
+	public Collection<Igrac> igracZaNacionalnost(@PathVariable("skracenica") String skracenica) 
+	{
+		Collection<Igrac> i = new ArrayList<Igrac>();
+		Collection<Nacionalnost> n = nacionalnostRepository.findBySkracenicaContainingIgnoreCase(skracenica);
+		for(Nacionalnost na : n)
+		{
+			i.addAll(igracRepository.findByNacionalnost(na));
+		}
+		return i;
 	}
 	
 	@PostMapping("igrac")
