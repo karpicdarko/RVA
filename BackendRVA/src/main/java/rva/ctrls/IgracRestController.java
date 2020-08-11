@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,6 +86,7 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje igraca u bazu")
+	@CrossOrigin
 	@PostMapping("igrac")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -95,6 +97,7 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje igraca u bazi")
+	@CrossOrigin
 	@PutMapping("igrac")
 	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -105,6 +108,7 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Brise igraca iz baze")
+	@CrossOrigin
 	@DeleteMapping("igrac/{id}")
 	public ResponseEntity<Igrac> deleteIgrac(@PathVariable("id") Integer id) {
 		if(!igracRepository.existsById(id)) {

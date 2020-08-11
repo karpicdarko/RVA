@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +55,7 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje ligu u bazu")
+	@CrossOrigin
 	@PostMapping("liga")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -64,6 +66,7 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje ligu u bazi")
+	@CrossOrigin
 	@PutMapping("liga")
 	public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -74,6 +77,7 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Brise ligu iz baze")
+	@CrossOrigin
 	@Transactional
 	@DeleteMapping("liga/{id}")
 	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,6 +69,7 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje tim u bazu")
+	@CrossOrigin
 	@PostMapping("tim")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
 		if(!timRepository.existsById(tim.getId())) {
@@ -78,6 +80,7 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje tim u bazi")
+	@CrossOrigin
 	@PutMapping("tim")
 	public ResponseEntity<Tim> updateTim(@RequestBody Tim tim) {
 		if(!timRepository.existsById(tim.getId())) {
@@ -88,6 +91,7 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Brise tim iz baze")
+	@CrossOrigin
 	@Transactional
 	@DeleteMapping("tim/{id}")
 	public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {

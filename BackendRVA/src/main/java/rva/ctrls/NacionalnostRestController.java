@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,6 +56,7 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje nacionalnost u bazu")
+	@CrossOrigin
 	@PostMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -65,6 +67,7 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje nacionalnost u bazi")
+	@CrossOrigin
 	@PutMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -75,6 +78,7 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Brise nacionalnost iz baze")
+	@CrossOrigin
 	@Transactional
 	@DeleteMapping("nacionalnost/{id}")
 	public ResponseEntity<Nacionalnost> deleteNacionalnost(@PathVariable("id") Integer id) {
