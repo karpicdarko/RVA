@@ -2,7 +2,6 @@ package rva.ctrls;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.*;
 import rva.jpa.Igrac;
 import rva.jpa.Nacionalnost;
 import rva.jpa.Tim;
@@ -23,6 +23,7 @@ import rva.repository.IgracRepository;
 import rva.repository.NacionalnostRepository;
 import rva.repository.TimRepository;
 
+@Api(tags = {"Igrac CRUD operacije"})
 @RestController
 public class IgracRestController {
 	
@@ -38,26 +39,31 @@ public class IgracRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value = "Vraca kolekciju svih igraca iz baze")
 	@GetMapping("igrac")
 	public Collection<Igrac> getIgraci() {
 		return igracRepository.findAll();
 	}
 	
+	@ApiOperation(value = "Vraca jednog igraca ciji je id prosledjen")
 	@GetMapping("igrac/{id}")
 	public Igrac getIgrac(@PathVariable("id") Integer id) {
 		return igracRepository.getOne(id);
 	}
 	
+	@ApiOperation(value = "Vraca jednog igraca cije je ime prosledjeno")
 	@GetMapping("igracIme/{ime}")
 	public Collection<Igrac> getIgracByIme(@PathVariable("ime") String ime) {
 		return igracRepository.findByImeContainingIgnoreCase(ime);
 	}
 	
+	@ApiOperation(value = "Vraca jednog igraca cije je prezime prosledjeno")
 	@GetMapping("igracPrezime/{prezime}")
 	public Collection<Igrac> getIgracByPrezime(@PathVariable("prezime") String prezime) {
 		return igracRepository.findByPrezimeContainingIgnoreCase(prezime);
 	}
 	
+	@ApiOperation(value = "Vraca kolekciju igraca koji igraju za tim ciji je id prosledjen")
 	@GetMapping("igraciZaTimId/{id}")
 	public Collection<Igrac> igracZaTimId(@PathVariable("id") Integer id)
 	{
@@ -65,6 +71,7 @@ public class IgracRestController {
 		return igracRepository.findByTim(t);
 	}
 	
+	@ApiOperation(value = "Vraca kolekciju igraca koji pripadaju nacionalnosti cija je skracenica prosledjena")
 	@GetMapping("igraciZaNacionalnostSkracenica/{skracenica}")
 	public Collection<Igrac> igracZaNacionalnost(@PathVariable("skracenica") String skracenica) 
 	{
@@ -77,6 +84,7 @@ public class IgracRestController {
 		return i;
 	}
 	
+	@ApiOperation(value = "Upisuje igraca u bazu")
 	@PostMapping("igrac")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -86,6 +94,7 @@ public class IgracRestController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 	
+	@ApiOperation(value = "Modifikuje igraca u bazi")
 	@PutMapping("igrac")
 	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -95,6 +104,7 @@ public class IgracRestController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Brise igraca iz baze")
 	@DeleteMapping("igrac/{id}")
 	public ResponseEntity<Igrac> deleteIgrac(@PathVariable("id") Integer id) {
 		if(!igracRepository.existsById(id)) {

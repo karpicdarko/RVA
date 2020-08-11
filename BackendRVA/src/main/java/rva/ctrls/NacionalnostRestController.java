@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import rva.jpa.Nacionalnost;
 import rva.repository.NacionalnostRepository;
 
+@Api(tags = {"Nacionalnost CRUD operacije"})
 @RestController
 public class NacionalnostRestController {
 	
@@ -27,26 +30,31 @@ public class NacionalnostRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value = "Vraca sve nacionalnosti iz baze")
 	@GetMapping("nacionalnost")
 	public Collection<Nacionalnost> getNacionalnosti() {
 		return nacionalnostRepository.findAll();
 	}
 	
+	@ApiOperation(value = "Vraca nacionalnost ciji je id naveden")
 	@GetMapping("nacionalnost/{id}")
 	public Nacionalnost getNacionalnost(@PathVariable("id") Integer id) {
 		return nacionalnostRepository.getOne(id);
 	}
 	
+	@ApiOperation(value = "Vraca nacionalnost ciji je naziv naveden")
 	@GetMapping("nacionalnostNaziv/{naziv}")
 	public Collection<Nacionalnost> getNacionalnostByNaziv(@PathVariable("naziv") String naziv) {
 		return nacionalnostRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
+	@ApiOperation(value = "Vraca nacionalnost cija je skracenica navedena")
 	@GetMapping("nacionalnostSkracenica/{skracenica}")
 	public Collection<Nacionalnost> getNacionalnostBySkracenica(@PathVariable("skracenica") String skracenica) {
 		return nacionalnostRepository.findBySkracenicaContainingIgnoreCase(skracenica);
 	}
 	
+	@ApiOperation(value = "Upisuje nacionalnost u bazu")
 	@PostMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -56,6 +64,7 @@ public class NacionalnostRestController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 	
+	@ApiOperation(value = "Modifikuje nacionalnost u bazi")
 	@PutMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -65,6 +74,7 @@ public class NacionalnostRestController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Brise nacionalnost iz baze")
 	@Transactional
 	@DeleteMapping("nacionalnost/{id}")
 	public ResponseEntity<Nacionalnost> deleteNacionalnost(@PathVariable("id") Integer id) {

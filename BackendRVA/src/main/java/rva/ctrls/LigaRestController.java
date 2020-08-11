@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.*;
 import rva.jpa.Liga;
 import rva.repository.LigaRepository;
 
+@Api(tags = {"Liga CRUD operacije"})
 @RestController
 public class LigaRestController {
 	
@@ -27,26 +29,31 @@ public class LigaRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value = "Vraca sve lige iz baze")
 	@GetMapping("liga")
 	public Collection<Liga> getLige() {
 		return ligaRepository.findAll();
 	}
 	
+	@ApiOperation(value = "Vraca ligu ciji je id naveden")
 	@GetMapping("liga/{id}")
 	public Liga getLiga(@PathVariable("id") Integer id) {
 		return ligaRepository.getOne(id);
 	}
 	
+	@ApiOperation(value = "Vraca ligu ciji je naziv naveden")
 	@GetMapping("ligaNaziv/{naziv}")
 	public Collection<Liga> getLigaByNaziv(@PathVariable("naziv") String naziv) {
 		return ligaRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
+	@ApiOperation(value = "Vraca ligu cija je oznaka navedena")
 	@GetMapping("ligaOznaka/{oznaka}")
 	public Collection<Liga> getLigaByOznaka(@PathVariable("oznaka") String oznaka) {
 		return ligaRepository.findByOznakaContainingIgnoreCase(oznaka);
 	}
 	
+	@ApiOperation(value = "Upisuje ligu u bazu")
 	@PostMapping("liga")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -56,6 +63,7 @@ public class LigaRestController {
 		return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 	
+	@ApiOperation(value = "Modifikuje ligu u bazi")
 	@PutMapping("liga")
 	public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -65,6 +73,7 @@ public class LigaRestController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Brise ligu iz baze")
 	@Transactional
 	@DeleteMapping("liga/{id}")
 	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {
