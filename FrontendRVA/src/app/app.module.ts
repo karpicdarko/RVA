@@ -16,6 +16,21 @@ import { TimComponent } from './Components/tim/tim.component';
 import { LigaComponent } from './Components/liga/liga.component';
 import { NacionalnostComponent } from './Components/nacionalnost/nacionalnost.component';
 import { IgracComponent } from './Components/igrac/igrac.component';
+
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 
 
@@ -40,7 +55,22 @@ import { from } from 'rxjs';
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    HttpClientModule,
+    FormsModule
 
   ],
   providers: [],
