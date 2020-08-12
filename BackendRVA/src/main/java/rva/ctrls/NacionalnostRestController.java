@@ -23,6 +23,7 @@ import rva.repository.NacionalnostRepository;
 
 @Api(tags = {"Nacionalnost CRUD operacije"})
 @RestController
+@CrossOrigin
 public class NacionalnostRestController {
 	
 	@Autowired
@@ -56,7 +57,6 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje nacionalnost u bazu")
-	@CrossOrigin
 	@PostMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> insertNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -67,7 +67,6 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje nacionalnost u bazi")
-	@CrossOrigin
 	@PutMapping("nacionalnost")
 	public ResponseEntity<Nacionalnost> updateNacionalnost(@RequestBody Nacionalnost nacionalnost) {
 		if(!nacionalnostRepository.existsById(nacionalnost.getId())) {
@@ -78,7 +77,6 @@ public class NacionalnostRestController {
 	}
 	
 	@ApiOperation(value = "Brise nacionalnost iz baze")
-	@CrossOrigin
 	@Transactional
 	@DeleteMapping("nacionalnost/{id}")
 	public ResponseEntity<Nacionalnost> deleteNacionalnost(@PathVariable("id") Integer id) {

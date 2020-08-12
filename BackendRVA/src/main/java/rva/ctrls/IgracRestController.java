@@ -26,6 +26,7 @@ import rva.repository.TimRepository;
 
 @Api(tags = {"Igrac CRUD operacije"})
 @RestController
+@CrossOrigin
 public class IgracRestController {
 	
 	@Autowired
@@ -86,7 +87,6 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje igraca u bazu")
-	@CrossOrigin
 	@PostMapping("igrac")
 	public ResponseEntity<Igrac> insertIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -97,7 +97,6 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje igraca u bazi")
-	@CrossOrigin
 	@PutMapping("igrac")
 	public ResponseEntity<Igrac> updateIgrac(@RequestBody Igrac igrac) {
 		if(!igracRepository.existsById(igrac.getId())) {
@@ -108,7 +107,6 @@ public class IgracRestController {
 	}
 	
 	@ApiOperation(value = "Brise igraca iz baze")
-	@CrossOrigin
 	@DeleteMapping("igrac/{id}")
 	public ResponseEntity<Igrac> deleteIgrac(@PathVariable("id") Integer id) {
 		if(!igracRepository.existsById(id)) {

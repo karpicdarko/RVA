@@ -22,6 +22,7 @@ import rva.repository.LigaRepository;
 
 @Api(tags = {"Liga CRUD operacije"})
 @RestController
+@CrossOrigin
 public class LigaRestController {
 	
 	@Autowired
@@ -55,7 +56,6 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje ligu u bazu")
-	@CrossOrigin
 	@PostMapping("liga")
 	public ResponseEntity<Liga> insertLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -66,7 +66,6 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje ligu u bazi")
-	@CrossOrigin
 	@PutMapping("liga")
 	public ResponseEntity<Liga> updateLiga(@RequestBody Liga liga) {
 		if(!ligaRepository.existsById(liga.getId())) {
@@ -77,7 +76,6 @@ public class LigaRestController {
 	}
 	
 	@ApiOperation(value = "Brise ligu iz baze")
-	@CrossOrigin
 	@Transactional
 	@DeleteMapping("liga/{id}")
 	public ResponseEntity<Liga> deleteLiga(@PathVariable("id") Integer id) {

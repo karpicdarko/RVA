@@ -26,6 +26,7 @@ import rva.repository.TimRepository;
 
 @Api(tags = {"Tim CRUD operacije"})
 @RestController
+@CrossOrigin
 public class TimRestController {
 	
 	@Autowired
@@ -69,7 +70,6 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Upisuje tim u bazu")
-	@CrossOrigin
 	@PostMapping("tim")
 	public ResponseEntity<Tim> insertTim(@RequestBody Tim tim) {
 		if(!timRepository.existsById(tim.getId())) {
@@ -80,7 +80,6 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Modifikuje tim u bazi")
-	@CrossOrigin
 	@PutMapping("tim")
 	public ResponseEntity<Tim> updateTim(@RequestBody Tim tim) {
 		if(!timRepository.existsById(tim.getId())) {
@@ -91,7 +90,6 @@ public class TimRestController {
 	}
 	
 	@ApiOperation(value = "Brise tim iz baze")
-	@CrossOrigin
 	@Transactional
 	@DeleteMapping("tim/{id}")
 	public ResponseEntity<Tim> deleteTim(@PathVariable("id") Integer id) {
