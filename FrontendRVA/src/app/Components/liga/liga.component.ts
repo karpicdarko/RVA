@@ -12,7 +12,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class LigaComponent implements OnInit {
 
-  displayedColumns: ['id', 'naziv', 'oznaka', 'actions'];
+  displayedColumns = ['id', 'naziv', 'oznaka', 'actions'];
   dataSource: MatTableDataSource<Liga>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;

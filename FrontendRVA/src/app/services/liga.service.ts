@@ -17,10 +17,10 @@ export class LigaService {
   public getAllLiga(): Observable<Liga[]> {
     this.httpClient.get<Liga[]>(this.API_URL).subscribe(data =>{
       this.dataChange.next(data);
-    });
+    },
     (error: HttpErrorResponse) => {
       console.log(error.name + ' ' + error.message);
-    };
+    });
 
     return this.dataChange.asObservable();
   }
