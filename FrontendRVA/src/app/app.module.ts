@@ -35,6 +35,7 @@ import { from } from 'rxjs';
 import { LigaDialogComponent } from './Components/dialogs/liga-dialog/liga-dialog.component';
 import { NacionalnostDialogComponent } from './Components/dialogs/nacionalnost-dialog/nacionalnost-dialog.component';
 import { TimDialogComponent } from './Components/dialogs/tim-dialog/tim-dialog.component';
+import { IgracDialogComponent } from './Components/dialogs/igrac-dialog/igrac-dialog.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { TimDialogComponent } from './Components/dialogs/tim-dialog/tim-dialog.c
     LigaDialogComponent,
     NacionalnostDialogComponent,
     TimDialogComponent,
+    IgracDialogComponent,
 
   ],
   imports: [

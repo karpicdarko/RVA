@@ -28,6 +28,7 @@ export class IgracService {
 
   public addIgrac(igrac: Igrac): void {
     igrac.id = 0;
+    console.log(igrac)
     this.httpClient.post(this.API_URL, igrac).subscribe();
   }
 

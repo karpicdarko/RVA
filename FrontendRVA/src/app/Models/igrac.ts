@@ -5,7 +5,7 @@ export class Igrac {
   id: number;
   ime: string;
   prezime: string;
-  brojRegistracije: string;
+  brojReg: string;
   datumRodjenja: Date;
   nacionalnost: Nacionalnost;
   tim: Tim;
