@@ -23,6 +23,7 @@ export class TimService {
       return this.dataChange.asObservable();
   }
   public addTim(tim: Tim): void {
+      tim.id = 0;
       this.httpClient.post(this.API_URL, tim).subscribe();
   }
   public updateTim(tim: Tim): void {

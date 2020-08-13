@@ -32,6 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
+import { LigaDialogComponent } from './Components/dialogs/liga-dialog/liga-dialog.component';
+import { NacionalnostDialogComponent } from './Components/dialogs/nacionalnost-dialog/nacionalnost-dialog.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import { from } from 'rxjs';
     LigaComponent,
     NacionalnostComponent,
     IgracComponent,
+    LigaDialogComponent,
+    NacionalnostDialogComponent,
 
   ],
   imports: [

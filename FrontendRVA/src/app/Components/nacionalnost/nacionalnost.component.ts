@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { NacionalnostDialogComponent } from '../dialogs/nacionalnost-dialog/nacionalnost-dialog.component';
 
 @Component({
   selector: 'app-nacionalnost',
@@ -18,7 +20,8 @@ export class NacionalnostComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor(private nacionalnostService: NacionalnostService) { }
+  constructor(private nacionalnostService: NacionalnostService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -30,6 +33,25 @@ export class NacionalnostComponent implements OnInit {
 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    });
+  }
+
+  public openDialog(
+    flag: number,
+    id?: number,
+    naziv?: string,
+    skracenica?: string
+  ) {
+    const dialogRef = this.dialog.open(NacionalnostDialogComponent, {
+      data: { id, naziv, skracenica },
+    });
+
+    dialogRef.componentInstance.flag = flag;
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        this.loadData();
+      }
     });
   }
 

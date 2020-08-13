@@ -26,15 +26,16 @@ export class LigaService {
   }
 
   public addLiga(liga: Liga): void {
-    this.httpClient.post(this.API_URL, liga);
+    liga.id = 0;
+    this.httpClient.post(this.API_URL, liga).subscribe();
   }
 
   public updateLiga(liga: Liga): void {
-    this.httpClient.put(this.API_URL, liga);
+    this.httpClient.put(this.API_URL, liga).subscribe();
   }
 
   public deleteLiga(id: number): void {
     console.log(this.API_URL + id );
-    this.httpClient.delete(this.API_URL + id);
+    this.httpClient.delete(this.API_URL + id).subscribe();
   }
 }
