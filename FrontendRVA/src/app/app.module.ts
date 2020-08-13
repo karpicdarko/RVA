@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 import { LigaDialogComponent } from './Components/dialogs/liga-dialog/liga-dialog.component';
 import { NacionalnostDialogComponent } from './Components/dialogs/nacionalnost-dialog/nacionalnost-dialog.component';
+import { TimDialogComponent } from './Components/dialogs/tim-dialog/tim-dialog.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { NacionalnostDialogComponent } from './Components/dialogs/nacionalnost-d
     IgracComponent,
     LigaDialogComponent,
     NacionalnostDialogComponent,
+    TimDialogComponent,
 
   ],
   imports: [

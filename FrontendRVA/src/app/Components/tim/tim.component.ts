@@ -1,9 +1,12 @@
+import { Liga } from './../../Models/liga';
 import { TimService } from './../../services/tim.service';
 import { Tim } from './../../Models/tim';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { TimDialogComponent } from '../dialogs/tim-dialog/tim-dialog.component';
 
 @Component({
   selector: 'app-tim',
@@ -20,7 +23,8 @@ export class TimComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public timService: TimService) { }
+  constructor(public timService: TimService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadData();
@@ -56,6 +60,18 @@ export class TimComponent implements OnInit {
 
   selectRow(row: any){
    this.selektovaniTim = row;
+  }
+
+  public openDialog(flag: number, id?: number, naziv?: string, osnovan?: Date, sediste?: string, liga?: Liga ) {
+    const dialogRef = this.dialog.open(TimDialogComponent,
+       { data: { id, naziv, osnovan, sediste, liga  } });
+    dialogRef.componentInstance.flag = flag;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1){
+         this.loadData();
+      }
+    });
   }
 
   applyFilter(filterValue: string){
