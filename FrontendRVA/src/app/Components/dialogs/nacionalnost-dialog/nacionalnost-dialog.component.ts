@@ -23,17 +23,17 @@ export class NacionalnostDialogComponent implements OnInit {
 
   public add(): void {
     this.nacionalnostService.addNacionalnost(this.data);
-    this.snackBar.open('Uspesno dodata liga: ' + this.data.naziv, 'U redu', {duration:2500});
+    this.snackBar.open('Uspesno dodata nacionalnost: ' + this.data.naziv, 'U redu', {duration:2500});
   }
 
   public update(): void {
     this.nacionalnostService.updateNacionalnost(this.data);
-    this.snackBar.open('Uspesno modifikovana liga: ' + this.data.naziv, 'U redu', {duration:2500});
+    this.snackBar.open('Uspesno modifikovana nacionalnost: ' + this.data.naziv, 'U redu', {duration:2500});
   }
 
   public delete(): void {
     this.nacionalnostService.deleteNacionalnost(this.data.id);
-    this.snackBar.open('Uspesno obrisana liga: ' + this.data.naziv, 'U redu', {duration:2500});
+    this.snackBar.open('Uspesno obrisana nacionalnost: ' + this.data.naziv, 'U redu', {duration:2500});
   }
 
   public cancel(): void {

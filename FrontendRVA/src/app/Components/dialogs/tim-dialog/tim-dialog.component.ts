@@ -41,14 +41,14 @@ export class TimDialogComponent implements OnInit {
 
   public update(): void {
     this.timService.updateTim(this.data);
-    this.snackBar.open('Uspešno modifikovan tim: ' + this.data.id, 'U redu', {
+    this.snackBar.open('Uspešno modifikovan tim: ' + this.data.naziv, 'U redu', {
       duration: 2500,
     });
   }
 
   public delete(): void {
     this.timService.deleteTim(this.data.id);
-    this.snackBar.open('Uspešno obrisan tim: ' + this.data.id, 'U redu', {
+    this.snackBar.open('Uspešno obrisan tim: ' + this.data.naziv, 'U redu', {
       duration: 2500,
     });
   }
